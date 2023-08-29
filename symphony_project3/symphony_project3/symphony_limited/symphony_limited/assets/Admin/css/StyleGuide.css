@@ -1,0 +1,77 @@
+﻿.delete a,
+.detail a,
+.edit a{
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    float:right;
+  
+}
+/*table .delete ,
+table .detail ,
+table .edit  {
+    padding:10px;
+}*/
+    .delete a {
+    background: red;
+
+}
+.detail a {
+    background: #dede00;
+}
+.edit a {
+    background:green;
+}
+.title-admin {
+    text-align: center;
+    margin: 30px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.create-new a {
+    padding: 10px;
+    background: #15c148;
+    color: white;
+    border-radius: 5px;
+}
+#menuLogin .create-new {
+    width:auto;
+    height:auto;
+    padding:10px 15px;
+}
+#menuLogin .create-new a {
+    color: white;
+}
+#menuLogin .list-action {
+    float: right;
+}
+#menuLogin .create-new a:hover {
+    background: #15c148;
+    color:white;
+    opacity:0.8;
+}
+
+.list-action {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.input-search {
+    margin-left: 20px;
+    border: 1px solid #bebebe;
+    border-right: none;
+}
+.search {
+    width: 50px;
+    margin-left: -4px;
+    border: 1px solid #bebebe;
+    border-left: none;
+}
+
+.save {
+    background: #018aff;
+    padding:10px 12px;
+    color:white;
+}

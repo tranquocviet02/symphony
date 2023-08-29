@@ -1,0 +1,13 @@
+﻿
+<ul class="group-category">
+    @foreach (var item in ViewBag.NameCategory)
+    {
+        <li class="item">
+            <a 
+               href="/Frontend/Courses/index?search=@item.Value">
+                @item.Value
+            </a>
+        </li>
+    }
+    </ul>
+

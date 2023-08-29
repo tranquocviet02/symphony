@@ -1,0 +1,170 @@
+﻿@using System.Globalization
+@using PagedList.Mvc
+@model List<symphony_limited.FrameWork.Course>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+
+
+<div class="row bootstrap-table bootstrap5">
+    <div class="card">
+        <div class="card-body">
+            <h3><b>List Blogs</b></h3>
+            <div class="gridjs-head">
+                <div class="gridjs-search">
+                    <input id="keyword" value="@ViewBag.search" type="search" placeholder="Type a keyword..." aria-label="Type a keyword..." class="gridjs-input gridjs-search-input">
+                </div>
+                <a id="Search" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" href="javascript:void(0)" style="margin-left: 6px">Search</a>
+                <a class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" href="/Admin/Courses/AddOrUpdate">Thêm</a>
+            </div>
+
+
+        </div>
+        <div class="card-body" style="margin-top: -26px;">
+            <table class="table" id="tbnsearch" style="">
+                <thead class="gridjs-thead">
+                    <tr>
+                        <th>
+                            NameCategory
+                        </th>
+                        <th>
+                            NameTeachear
+                        </th>
+                        <th>
+                            NameCourse
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Numberofsession
+                        </th>
+                        <th>
+                            Hinh Anh
+                        </th>
+                        <th>
+                            Chức Năng
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(Model => item.Category.NameCategory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => item.Teacher.NameTeachear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => item.NameCourse)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => item.Status)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(Model => item.Numberofsession)
+                        </td>
+                        <td>
+                            <img src="~/Upload/Course/@item.Img" style="width:100px;height:auto;border-radius:0px" />
+                            <br />
+                        </td>
+                        <td>
+                            <a href="javascript:void(0)" class="button btndelete mr-2" data-id="@item.CourseId" title="Delete"><i class="fa fa-trash" style="color:black"></i></a> |
+                            <a href="/Admin/Courses/AddOrUpdate/@item.CourseId" class="button btneditview mr-2" title="Edit"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+    </div>
+</div>
+<!--Padding-->
+<div class="row g-0 align-items-center pb-4" style="margin-top:20px">
+    <div class="col-sm-6">
+    </div>
+
+    <div class="col-sm-6">
+        <div class="float-sm-end">
+            <ul class="pagination mb-sm-0">
+
+                <li class="page-item" style="display:@(ViewBag.pagenumber == 1 ? "none" : "inline");">
+                    <a href="/Admin/Courses/index?search=@ViewBag.search&pageNumber=@(ViewBag.pagenumber - 1)"
+                       class="page-link btn-outline-info">
+                        Previous
+                    </a>
+                </li>
+                @for (var i = 1; i <= ViewBag.page; i++)
+                {
+                    if (ViewBag.pagenumber == i)
+                    {
+                        <li class="page-item active">
+                            <a href="/Admin/Courses/index?search=@ViewBag.search&pageNumber=@i" class="page-link" style="border-radius: 30px !important; margin-left: 4px; margin-right: 4px;">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a href="/Admin/Courses/index?search=@ViewBag.search&pageNumber=@i" class="page-link" style="border-radius: 30px !important; margin-right: 4px; margin-left: 4px;">@i</a>
+                        </li>
+                    }
+
+                }
+                <li class="page-item" style="display:@(ViewBag.pagenumber == ViewBag.page ? "none" : "inline");">
+                    <a href="/Admin/Courses/index?search=@ViewBag.search&pageNumber=@(ViewBag.pagenumber + 1)"
+                       class="page-link btn-outline-info">
+                        Next
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--End Padding-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $('.btndelete').click(function () {
+            debugger
+            var id = $(this).data('id');
+            if (confirm('Ban co muon xoa ban ghi nay !')) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/Courses/DeleteMG_Course",
+                    data: {
+                        ID: id
+                    },
+                    success: function (rp) {
+                        alert(rp.mess);
+                        setTimeout(function () {
+                            window.location.reload()
+                        }, 1000);
+                    },
+                });
+            };
+        });
+
+        $('#Search').click(function () {
+            window.location.href = "/Admin/Courses/Index?search=" + $('#keyword').val();
+        });
+
+        $('#keyword').keypress(function (event) {
+            window.location.href = "/Admin/Courses/Index?search=" + $('#keyword').val();
+        });
+
+    });
+
+</script>

@@ -1,0 +1,61 @@
+﻿@model symphony_limited.FrameWork.Course
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Frontend/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumbs" data-aos="fade-in">
+    <div class="container">
+        <h2>Course Details</h2>
+        <p>
+            Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit
+            quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium.
+        </p>
+    </div>
+</div><!-- End Breadcrumbs -->
+<main id="main-detail">
+    <!-- ======= Cource Details Section ======= -->
+    <section id="course-details" class="course-details">
+        <div class="course-details-container" data-aos="fade-up">
+            
+                <div class="row">
+                    <div class="col-lg-8">
+                        
+
+                        <img src="~/Upload/Course/" class="img-fluid" alt="">
+                        
+                        <h3>@Html.DisplayFor(model => model.NameCourse)</h3>
+                        <p>
+                            @Html.DisplayFor(model => model.Description)
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="course-info d-flex justify-content-between align-items-center">
+                            <h5>@Html.DisplayFor(model => model.Teacher.NameTeachear)</h5>
+                            <p><a href="#">@Html.DisplayFor(model => model.Teacher.Image)</a></p>
+                        </div>
+                        <div class="course-info d-flex justify-content-between align-items-center">
+                            <h5>Course Fee</h5>
+                            <p>$165</p>
+                        </div>
+                        <div class="course-info d-flex justify-content-between align-items-center">
+                            <h5>Number of subject</h5>
+                            <p>30</p>
+                        </div>
+                        <div class="course-info d-flex justify-content-between align-items-center">
+                            <h5>Schedule</h5>
+                            <p>8.00 am - 12.00 am <br> 13.00 pm - 17.00 pm <br> 18.00 pm - 22.00 pm</p>
+                        </div>
+                    </div>
+                </div>
+            
+
+        </div>
+    </section><!-- End Cource Details Section -->
+    <div class="action action-courses">
+        <button type="button" class="button-courses detail" data-toggle="modal" data-target="#exampleModalCenter">
+            Registration Now
+        </button>
+    </div>
+</main><!-- End #main -->
